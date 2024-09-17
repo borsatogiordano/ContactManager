@@ -1,6 +1,7 @@
-import styles from './Contact.module.css'; // Importando o CSS Module
+/* eslint-disable react/prop-types */
+import styles from './Contact.module.css';
 
-export function ContactPreview({ contact }) {
+export default function ContactPreview({ contact }) {
   return (
     <ul className={styles.contactItemPreview}>
       <li>

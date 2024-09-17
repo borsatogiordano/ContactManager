@@ -1,3 +1,5 @@
+
+
 .contactItemPreview {
     display: flex;
     width: 100%;
@@ -15,6 +17,7 @@
     border-radius: 50px;
     background-color: rgb(52, 52, 52);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    color: white;
   }
   
   .contactItemPreview div {

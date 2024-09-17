@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Header } from "./components/Header/header";
-import { ContactPreview } from "./components/ContactPreview/contact";
+import ContactPreview from "./components/ContactPreview/contact";
 import { STORAGE_SERVICE } from "./services/storage.js";
 
 function App() {
@@ -37,15 +37,15 @@ function App() {
       <Header />
       <main>
         <aside className="ContactList">
-          <header className="ContactListHeader">
+          {/* <header className="ContactListHeader">
             <form action="">
               <input type="text" placeholder="Busque um contato:" />
               <button></button>
             </form>
-          </header>
+          </header> */}
           <section className="ContactForm">
             <form onSubmit={addNewContact}>
-              <legend>Adicionar contato</legend>
+              <legend>ADICIONAR CONTATO</legend>
               <input
                 type="text"
                 placeholder="Nome:"
@@ -53,7 +53,7 @@ function App() {
                 onChange={(e) => setName(e.target.value)}
               />
               <input
-                type="text"
+                type="tel"
                 placeholder="Telefone:"
                 value={tel}
                 onChange={(e) => setTel(e.target.value)}
@@ -64,7 +64,7 @@ function App() {
                 value={mail}
                 onChange={(e) => setMail(e.target.value)}
               />
-              <button type="submit">Adicionar</button>
+              <button type="submit"><img src="https://static.thenounproject.com/png/961411-200.png" alt="" /></button>
             </form>
           </section>
           <section className="ContactListMain">

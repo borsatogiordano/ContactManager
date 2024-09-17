@@ -1,3 +1,57 @@
-.ContactList {
-    
+.ContactForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ContactForm form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 75%;
+  height: auto;
+  padding: 20px;
+  border-radius: 80px;
+  background-color: rgb(52, 52, 52);
+  border: 0.1px solid rgb(148, 148, 148);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  margin: 20px;
+}
+
+.ContactForm form input {
+    padding: 15px;
+    border-radius: 40px;
+    height: 40px;
+    width: 80%;
+    margin: 8px;
+    background-color: rgb(43, 43, 43);
+    border: 0.1px solid rgb(148, 148, 148);
+}
+
+.ContactForm img {
+  width: 50px;
+  height: auto;
+}
+.ContactForm button {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  padding: 0px;
+  border-radius: 60px;
+  background-color: rgb(43, 43, 43);
+  border: solid 1px rgb(255, 255, 255);
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+.ContactForm button:hover {
+  background-color: white;
+  color: rgb(43, 43, 43);
+
+}
+
+.ContactForm legend {
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: white;
 }

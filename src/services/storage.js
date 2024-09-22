@@ -1,77 +1,66 @@
 const DB_KEY = "@test";
 
 export const STORAGE_SERVICE = {
-  // List Contacts
+  // Listar contatos
   listContacts: () => {
     const storage = localStorage.getItem(DB_KEY);
-
-    if (storage) {
-      return JSON.parse(storage);
-    }
-    return [];
+    return storage ? JSON.parse(storage) : [];
   },
 
-  // Create Contact
+  // Criar novo contato
   createContact: (contactName, contactTel, contactMail) => {
-    const storage = localStorage.getItem(DB_KEY);
+    const storage = STORAGE_SERVICE.listContacts();
 
     if (!contactName || !contactTel || !contactMail) {
       return alert("Todos os campos são obrigatórios");
     }
 
     const newContact = {
+      id: Date.now(), // Cria um ID único baseado no timestamp
       name: contactName,
       tel: contactTel,
       mail: contactMail,
     };
 
-    if (storage) {
-      const storageParsed = JSON.parse(storage);
+    const updatedContacts = [...storage, newContact];
+    localStorage.setItem(DB_KEY, JSON.stringify(updatedContacts));
 
-      const contacts = [...storageParsed, newContact];
-
-      return localStorage.setItem(DB_KEY, JSON.stringify(contacts));
-    }
-
-    return localStorage.setItem(DB_KEY, JSON.stringify([newContact]));
+    return newContact; // Retorna o novo contato
   },
 
-  deleteContact: (contactName) => {
-    const storage = localStorage.getItem(DB_KEY);
+  // Atualizar contato existente
+  updateContact: (contactId, updatedContact) => {
+    const storage = STORAGE_SERVICE.listContacts();
 
-    if (storage) {
-      const storageParsed = JSON.parse(storage);
-
-      const filteredContacts = storageParsed.filter(
-        (item) => item.name !== contactName
-      );
-
-      return localStorage.setItem(DB_KEY, JSON.stringify(filteredContacts));
+    const contactIndex = storage.findIndex((item) => item.id === contactId);
+    if (contactIndex === -1) {
+      return alert("Contato não encontrado");
     }
 
-    return alert("Contato não encontrado");
+    storage[contactIndex] = { ...storage[contactIndex], ...updatedContact };
+
+    localStorage.setItem(DB_KEY, JSON.stringify(storage));
+
+    return storage[contactIndex]; // Retorna o contato atualizado
   },
 
-  updateContactState: (contactName) => {
-    const storage = localStorage.getItem(DB_KEY);
+  // Deletar contato
+  deleteContact: (contactId) => {
+    const storage = STORAGE_SERVICE.listContacts();
 
-    if (storage) {
-      const storageParsed = JSON.parse(storage);
+    const updatedContacts = storage.filter((item) => item.id !== contactId);
 
-      const updatedContacts = storageParsed.map((item) => {
-        if (item.name === contactName) {
-          return {
-            ...item,
-            isCompleted: !item.isCompleted,
-          };
-        }
-        return item;
-      });
-
-      return localStorage.setItem(DB_KEY, JSON.stringify(updatedContacts));
+    if (storage.length === updatedContacts.length) {
+      return alert("Contato não encontrado");
     }
 
-    alert("Contato não encontrado");
-    return false;
+    localStorage.setItem(DB_KEY, JSON.stringify(updatedContacts));
+    return true; // Retorna sucesso na exclusão
+  },
+
+  // Função de utilidade para buscar um contato por ID
+  getContactById: (contactId) => {
+    const storage = STORAGE_SERVICE.listContacts();
+    return storage.find((contact) => contact.id === contactId) || null;
   },
 };

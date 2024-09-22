@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import styles from './Contact.module.css';
 
-export default function ContactPreview({ contact }) {
+export default function ContactPreview({ contact, onSelect }) {
   return (
     <ul className={styles.contactItemPreview}>
       <li>
@@ -17,7 +17,7 @@ export default function ContactPreview({ contact }) {
           <p>{contact?.tel}</p>
         </div>
         <div>
-          <button>Exibir Detalhes</button>
+          <button onClick={onSelect}>Exibir Detalhes</button>
         </div>
       </li>
     </ul>
